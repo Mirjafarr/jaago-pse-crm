@@ -1,26 +1,702 @@
+
 @import "tailwindcss";
 
+/* ========================================
+   JAAGO FOUNDATION — GLOBAL THEME
+   ======================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f0e4;
+  --foreground: #172334;
+
+  --jaago-yellow: #ffc70b;
+  --jaago-yellow-hover: #edb900;
+  --jaago-black: #15171c;
+
+  --jaago-background: #f5f0e4;
+  --jaago-surface: #ffffff;
+  --jaago-border: #e7e9ee;
+  --jaago-text: #172334;
+  --jaago-muted: #667085;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-jakarta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ========================================
+   BASE STYLES
+   ======================================== */
+
+html {
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  background: var(--jaago-background);
+  color: var(--jaago-text);
+  font-family: var(--font-jakarta), Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   INTERACTIVE ELEMENTS
+   ======================================== */
+
+button,
+input,
+select,
+textarea {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--jaago-yellow);
+  outline-offset: 2px;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+thead th {
+  font-weight: 700;
+}
+
+tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+
+::selection {
+  background-color: #ffe180;
+  color: #15171c;
+}
+
+/* ========================================
+   SCROLLBARS
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd0d8;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a5abb5;
+}
+
+/* ========================================
+   REUSABLE CRM COMPONENT STYLES
+   ======================================== */
+
+.jaago-card {
+  border: 1px solid var(--jaago-border);
+  border-radius: 18px;
+  background-color: var(--jaago-surface);
+  box-shadow: 0 4px 24px rgb(20 25 35 / 4%);
+}
+
+.jaago-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  background-color: var(--jaago-yellow);
+  padding: 11px 18px;
+  color: var(--jaago-black);
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.jaago-button:hover:not(:disabled) {
+  background-color: var(--jaago-yellow-hover);
+  transform: translateY(-1px);
+}
+
+.jaago-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+}
+
+.jaago-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--jaago-border);
+  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 11px 18px;
+  color: var(--jaago-black);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.jaago-button-secondary:hover {
+  background-color: #f3f4f6;
+}
+
+.jaago-input {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  background-color: #ffffff;
+  padding: 11px 14px;
+  color: var(--jaago-text);
+  font-size: 14px;
+}
+
+.jaago-input:focus {
+  border-color: var(--jaago-yellow);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(255 199 11 / 18%);
+}
+
+.jaago-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .jaago-card {
+    border-radius: 14px;
+  }
+}
+
+/* ========================================
+   PREMIUM DASHBOARD — COLORED CARDS
+   ======================================== */
+
+.dashboard-premium {
+  min-height: 100vh;
+  border-radius: 24px;
+}
+
+.dashboard-premium h1 {
+  color: #172334;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.dashboard-premium h2,
+.dashboard-premium h3,
+.dashboard-premium h4 {
+  color: #172334;
+  letter-spacing: -0.025em;
+}
+
+/* KPI cards */
+
+.dashboard-premium > section.grid > div,
+.dashboard-premium > section.space-y-5 > div.grid > div {
+  border: 1px solid rgba(23, 35, 52, 0.07);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(23, 35, 52, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Gold */
+
+.dashboard-premium > section.grid > div:nth-child(4n + 1),
+.dashboard-premium > section.space-y-5 > div.grid > div:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #fff0ba, #ffe18b);
+}
+
+/* Blue */
+
+.dashboard-premium > section.grid > div:nth-child(4n + 2),
+.dashboard-premium > section.space-y-5 > div.grid > div:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #e1f1ff, #bfdefa);
+}
+
+/* Green */
+
+.dashboard-premium > section.grid > div:nth-child(4n + 3),
+.dashboard-premium > section.space-y-5 > div.grid > div:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #e0f8e9, #bcebd1);
+}
+
+/* Lavender */
+
+.dashboard-premium > section.grid > div:nth-child(4n + 4),
+.dashboard-premium > section.space-y-5 > div.grid > div:nth-child(4n + 4) {
+  background: linear-gradient(135deg, #f0e5ff, #dcc6fa);
+}
+
+/* Large dashboard panels */
+
+.dashboard-premium > section.space-y-5 > div.rounded-xl,
+.dashboard-premium > section.rounded-xl {
+  background: linear-gradient(135deg, #fffaf0, #fff1d8);
+  border: 1px solid #e6d6b7;
+  border-radius: 22px;
+  box-shadow: 0 8px 26px rgba(23, 35, 52, 0.05);
+}
+
+/* Quarterly cards */
+
+.dashboard-premium .grid > div.rounded-lg {
+  background: linear-gradient(145deg, #e8f0ff, #d7e6fc);
+  border: 1px solid #c6d9f3;
+  border-radius: 16px;
+}
+
+/* Hover effects */
+
+.dashboard-premium > section.grid > div:hover,
+.dashboard-premium > section.space-y-5 > div.grid > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(23, 35, 52, 0.13);
+}
+
+.dashboard-premium .text-gray-500,
+.dashboard-premium .text-gray-600 {
+  color: #536176;
+}
+
+.dashboard-premium .bg-gray-200 {
+  background-color: #e5e2db;
+}
+
+.dashboard-premium thead {
+  background-color: #f0e5c9;
+}
+
+.dashboard-premium tbody tr:hover {
+  background-color: #fff0c5;
+}
+
+.dashboard-premium select {
+  background-color: #fffdf8;
+  border: 1px solid #e5d9c5;
+  border-radius: 12px;
+  color: #172334;
+  font-weight: 600;
+}
+
+/* ========================================
+   ALL CRM MODULES
+   ======================================== */
+
+.jaago-module {
+  min-height: 100vh;
+  padding: 12px;
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      ellipse at 95% 0%,
+      rgba(255, 199, 11, 0.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 0% 90%,
+      rgba(148, 187, 230, 0.15),
+      transparent 45%
+    ),
+    linear-gradient(135deg, #faf5e8, #edf2f7);
+}
+
+.jaago-module h1 {
+  color: #172334;
+  font-size: clamp(1.65rem, 2.5vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.jaago-module h2 {
+  color: #172334;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.jaago-module h3 {
+  color: #27364b;
+  font-weight: 700;
+}
+
+/* Module forms and panels */
+
+.jaago-module section.bg-white,
+.jaago-module form.bg-white {
+  background: linear-gradient(
+    145deg,
+    #fffdf5 0%,
+    #fff8e6 100%
+  );
+  border: 1px solid #eadbb7;
+  border-radius: 22px;
+  box-shadow:
+    0 6px 14px rgba(38, 47, 60, 0.035),
+    0 14px 36px rgba(38, 47, 60, 0.05);
+}
+
+/* Colored summary cards */
+
+.jaago-module section.grid > div,
+.jaago-module > div.grid > div {
+  border: 1px solid rgba(23, 35, 52, 0.08);
+  border-radius: 20px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.jaago-module section.grid > div:nth-child(4n + 1),
+.jaago-module > div.grid > div:nth-child(4n + 1) {
+  background: linear-gradient(135deg, #fff1be, #ffe39a);
+}
+
+.jaago-module section.grid > div:nth-child(4n + 2),
+.jaago-module > div.grid > div:nth-child(4n + 2) {
+  background: linear-gradient(135deg, #e5f3ff, #c9e4fa);
+}
+
+.jaago-module section.grid > div:nth-child(4n + 3),
+.jaago-module > div.grid > div:nth-child(4n + 3) {
+  background: linear-gradient(135deg, #e5faed, #c7ead5);
+}
+
+.jaago-module section.grid > div:nth-child(4n + 4),
+.jaago-module > div.grid > div:nth-child(4n + 4) {
+  background: linear-gradient(135deg, #f6eaff, #e4d1fa);
+}
+
+.jaago-module section.grid > div:hover,
+.jaago-module > div.grid > div:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(23, 35, 52, 0.10);
+}
+
+/* Module form fields */
+
+.jaago-module input:not([type="checkbox"]),
+.jaago-module select,
+.jaago-module textarea {
+  border: 1px solid #d9d6cf;
+  border-radius: 12px;
+  background-color: #ffffff;
+  color: #172334;
+  font-size: 14px;
+}
+
+.jaago-module input:not([type="checkbox"]):focus,
+.jaago-module select:focus,
+.jaago-module textarea:focus {
+  border-color: #d8a900;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 199, 11, 0.18);
+}
+
+.jaago-module input::placeholder,
+.jaago-module textarea::placeholder {
+  color: #929aa8;
+}
+
+.jaago-module label span {
+  color: #35445a;
+  font-weight: 600;
+}
+
+/* Module primary buttons */
+
+.jaago-module button.bg-green-700 {
+  background: linear-gradient(135deg, #ffda4b, #ffc70b);
+  border: 1px solid #efbb00;
+  border-radius: 12px;
+  color: #172334;
+  box-shadow: 0 4px 12px rgba(255, 199, 11, 0.16);
+  font-weight: 700;
+}
+
+.jaago-module button.bg-green-700:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ffe27b, #ffca19);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(255, 199, 11, 0.24);
+}
+
+/* Module secondary buttons */
+
+.jaago-module button.border-green-700 {
+  border-color: #d8b34c;
+  border-radius: 10px;
+  background-color: #fff8dd;
+  color: #725400;
+}
+
+.jaago-module button.border-green-700:hover {
+  background-color: #ffedb6;
+}
+
+.jaago-module button {
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Module tables */
+
+.jaago-module table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.jaago-module thead {
+  background-color: #f0e5c9;
+}
+
+.jaago-module thead th {
+  color: #25354a;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.025em;
+}
+
+.jaago-module tbody {
+  background-color: rgba(255, 255, 255, 0.58);
+}
+
+.jaago-module tbody tr {
+  border-bottom: 1px solid #ece6db;
+  transition: background-color 0.18s ease;
+}
+
+.jaago-module tbody tr:nth-child(even) {
+  background-color: rgba(245, 237, 217, 0.40);
+}
+
+.jaago-module tbody tr:hover {
+  background-color: #fff0c5;
+}
+
+.jaago-module tbody td {
+  color: #35445a;
+}
+
+/* Status messages */
+
+.jaago-module [role="status"] {
+  border: 1px solid #a9d8bc;
+  border-radius: 14px;
+  background-color: #e4f6e9;
+  color: #16633f;
+}
+
+.jaago-module [role="alert"] {
+  border: 1px solid #fac7c7;
+  border-radius: 14px;
+  background-color: #fff0f0;
+  color: #ac3030;
+}
+
+/* Progress bars */
+
+.jaago-module .bg-gray-200 {
+  background-color: #e2ddd0;
+}
+
+.jaago-module .bg-green-700:not(button) {
+  background: linear-gradient(90deg, #ffc70b, #e9a900);
+}
+
+/* ========================================
+   PREMIUM LOGIN PAGE
+   ======================================== */
+
+.jaago-login-page {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255, 199, 11, 0.23),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(140, 177, 225, 0.20),
+      transparent 42%
+    ),
+    #f5f0e4;
+}
+
+/* Login card */
+
+.jaago-login-page .jaago-login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+
+  background-color: #ffffff;
+  border: 1px solid #e8dac0;
+  border-radius: 24px;
+
+  box-shadow:
+    0 20px 65px rgba(23, 35, 52, 0.13),
+    0 4px 12px rgba(23, 35, 52, 0.04);
+}
+
+/* Login inputs */
+
+.jaago-login-page input.jaago-login-input {
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+
+  background-color: #ffffff;
+  border: 1px solid #cfd5df;
+  border-radius: 12px;
+
+  color: #172334;
+  font-size: 14px;
+}
+
+.jaago-login-page input.jaago-login-input:focus {
+  border-color: #ffc70b;
+  outline: none;
+
+  box-shadow:
+    0 0 0 4px rgba(255, 199, 11, 0.20);
+}
+
+/* Login primary button */
+
+.jaago-login-page button.jaago-login-button {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+
+  background-color: #ffc70b;
+  background-image: linear-gradient(
+    135deg,
+    #ffe16b,
+    #ffc70b
+  );
+
+  border: 1px solid #e6b200;
+  border-radius: 12px;
+
+  color: #15171c;
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow:
+    0 7px 20px rgba(255, 199, 11, 0.25);
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.jaago-login-page button.jaago-login-button:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    #ffe887,
+    #ffd02a
+  );
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(255, 199, 11, 0.30);
+}
+
+.jaago-login-page button.jaago-login-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================
+   RESPONSIVE STYLES
+   ======================================== */
+
+@media (max-width: 640px) {
+  .jaago-module {
+    padding: 4px;
+    border-radius: 14px;
+  }
+
+  .jaago-module section.bg-white,
+  .jaago-module form.bg-white {
+    border-radius: 16px;
+  }
+
+  .jaago-module table {
+    font-size: 12px;
+  }
+
+  .jaago-login-page {
+    padding: 16px;
+  }
+
+  .jaago-login-page .jaago-login-card {
+    padding: 28px 22px;
+    border-radius: 18px;
+  }
+}
+
+/* Accessibility: reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .jaago-module *,
+  .jaago-module *::before,
+  .jaago-module *::after,
+  .dashboard-premium *,
+  .dashboard-premium *::before,
+  .dashboard-premium *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }
