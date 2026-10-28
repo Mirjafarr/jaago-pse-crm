@@ -55,14 +55,14 @@ export default function LoginPage() {
             />
           </div>
 
-          <div>
-            <p className="text-xl font-extrabold tracking-tight text-[#172334]">
-              JAAGO<span className="text-[#D8A000]">.</span>
-            </p>
-            <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-gray-500">
-              Foundation
-            </p>
-          </div>
+          <div className="flex flex-col justify-center">
+  <p className="m-0 text-xl leading-6 font-extrabold tracking-tight text-[#172334]">
+    JAAGO<span className="text-[#D8A000]">.</span>
+  </p>
+  <p className="m-0 text-[10px] leading-4 font-bold uppercase tracking-[0.18em] text-gray-500">
+    Foundation
+  </p>
+</div>
         </div>
 
         {/* Heading */}
@@ -145,13 +145,15 @@ export default function LoginPage() {
 
           {/* Sign in */}
           <button
-            type="submit"
-            disabled={loading}
-            className="jaago-login-button flex items-center justify-center gap-2!"
-          >
-            <LogIn size={18} />
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
+  type="submit"
+  disabled={loading}
+  className="jaago-login-button"
+>
+  <span className="inline-flex items-center justify-center gap-2">
+    <LogIn size={18} className="shrink-0" />
+    <span>{loading ? 'Signing in...' : 'Sign In'}</span>
+  </span>
+</button>
         </form>
 
         {/* Footer */}

@@ -700,3 +700,24 @@ tbody tr {
     animation-duration: 0.01ms !important;
   }
 }
+/* JAAGO login alignment fixes */
+
+.jaago-login-card .jaago-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.jaago-login-card .jaago-login-button svg {
+  position: static;
+  transform: none;
+  flex-shrink: 0;
+}
+
+/* Brand logo */
+.jaago-login-card > div:first-child {
+  display: flex;
+  align-items: center;
+}
